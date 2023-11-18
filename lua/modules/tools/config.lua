@@ -12,6 +12,11 @@ function config.telescope()
       grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
       qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     },
+    pickers = {
+      colorscheme = {
+        enable_preview = true,
+      },
+    },
     extensions = {
       fzy_native = {
         override_generic_sorter = false,

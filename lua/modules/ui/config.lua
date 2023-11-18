@@ -1,7 +1,7 @@
 local config = {}
 
-function config.zephyr()
-  vim.cmd('colorscheme zephyr')
+function config.theme()
+  vim.cmd([[colorscheme nightowl]])
 end
 
 function config.dashboard()
@@ -48,20 +48,54 @@ function config.nvim_bufferline()
 end
 
 function config.indent_blankline()
-  require('indent_blankline').setup({
-    char = '│',
-    use_treesitter_scope = true,
-    show_first_indent_level = true,
-    show_current_context = false,
-    show_current_context_start = false,
-    show_current_context_start_on_current_line = false,
-    filetype_exclude = {
-      'dashboard',
-      'log',
-      'TelescopePrompt',
+  require('ibl').setup()
+end
+
+function config.neotree()
+  require('neo-tree').setup({
+    close_if_last_window = true,
+    icon = {
+      folder_empty = '󰜌',
     },
-    buftype_exclude = { 'terminal', 'nofile', 'prompt' },
+    git_status = {
+      symbols = {
+        added = '✚',
+        modified = '',
+      },
+    },
+    file_size = {
+      enabled = true,
+      required_width = 25,
+    },
+    commands = {},
+    window = {
+      position = 'right',
+      width = 35,
+    },
   })
 end
 
+function config.lualine()
+  local fn = vim.fn
+  local cwd = function()
+    local dir_name = '%#St_cwd# 󰉖 ' .. fn.fnamemodify(fn.getcwd(), ':t') .. ' '
+    return (vim.o.columns > 85 and dir_name) or ''
+  end
+
+  require('lualine').setup({
+    sections = {
+      lualine_y = { cwd() },
+    },
+  })
+end
+
+function config.noice()
+  vim.opt.termguicolors = true
+  require('notify').setup({
+    top_down = false,
+    stages = 'fade',
+    render = 'compact',
+  })
+  require('noice').setup()
+end
 return config

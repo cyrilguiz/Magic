@@ -51,10 +51,9 @@ opt.undofile = true
 opt.smarttab = true
 opt.expandtab = true
 opt.autoindent = true
-opt.tabstop = 2
-opt.shiftwidth = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
 
--- wrap
 opt.linebreak = true
 opt.whichwrap = 'h,l,<,>,[,],~'
 opt.breakindentopt = 'shift:2,min:20'
@@ -67,8 +66,6 @@ opt.number = true
 opt.signcolumn = 'yes'
 opt.spelloptions = 'camel'
 
-opt.textwidth = 100
-opt.colorcolumn = '100'
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
     name = 'macOS-clipboard',

@@ -1,10 +1,14 @@
 {
-  "contributes": {
-    "snippets": [
-      {
-        "language": "lua",
-        "path": "./lua.json"
-      }
-    ]
-  }
+    "contributes": {
+        "snippets": [
+            {
+                "language": "lua",
+                "path": "./lua.json"
+            },
+            {
+                "language": "zig",
+                "path": "./zig.json"
+            }
+        ]
+    }
 }

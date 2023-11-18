@@ -15,21 +15,21 @@ xmap({ ' ', '', opts(noremap) })
 nmap({
   -- noremal remap
   -- close buffer
-  { '<C-x>k', cmd('bdelete'), opts(noremap, silent) },
+  { '<Leader>x', cmd('Bdelete'), opts(noremap, silent) },
   -- save
   { '<C-s>', cmd('write'), opts(noremap) },
   -- yank
   { 'Y', 'y$', opts(noremap) },
   -- buffer jump
-  { ']b', cmd('bn'), opts(noremap) },
-  { '[b', cmd('bp'), opts(noremap) },
-  -- remove trailing white space
-  { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
+  { '<Tab>', cmd('bn'), opts(noremap) },
+  { '<S-Tab>', cmd('bp'), opts(noremap) },
+  -- terminal open and close
+  { '<A-q>', cmd('C-\\C-n'), opts(noremap) },
   -- window jump
-  { '<C-h>', '<C-w>h', opts(noremap) },
-  { '<C-l>', '<C-w>l', opts(noremap) },
-  { '<C-j>', '<C-w>j', opts(noremap) },
-  { '<C-k>', '<C-w>k', opts(noremap) },
+  { '<A-h>', '<C-w>h', opts(noremap) },
+  { '<A-l>', '<C-w>l', opts(noremap) },
+  { '<A-j>', '<C-w>j', opts(noremap) },
+  { '<A-k>', '<C-w>k', opts(noremap) },
 })
 
 imap({
@@ -49,10 +49,11 @@ nmap({
   { '<Leader>n', cmd('DashboardNewFile'), opts(noremap, silent) },
   { '<Leader>ss', cmd('SessionSave'), opts(noremap, silent) },
   { '<Leader>sl', cmd('SessionLoad'), opts(noremap, silent) },
-  -- nvimtree
-  { '<Leader>e', cmd('NvimTreeToggle'), opts(noremap, silent) },
+  -- neotree
+  { '<Leader>e', cmd('Neotree toggle'), opts(noremap, silent) },
   -- Telescope
   { '<Leader>b', cmd('Telescope buffers'), opts(noremap, silent) },
-  { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
+  { '<Leader>fg', cmd('Telescope live_grep'), opts(noremap, silent) },
   { '<Leader>ff', cmd('Telescope find_files'), opts(noremap, silent) },
+  { '<Leader>th', cmd('Telescope colorscheme'), opts(noremap, silent) },
 })

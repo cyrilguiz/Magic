@@ -18,3 +18,11 @@ package({
     require('hlsearch').setup()
   end,
 })
+
+package({
+  'famiu/bufdelete.nvim',
+})
+
+package({
+  'tpope/vim-fugitive',
+})

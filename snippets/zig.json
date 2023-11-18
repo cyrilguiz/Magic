@@ -1,0 +1,29 @@
+{
+    "GeneralPurposeAllocartor": {
+        "prefix": "gpa",
+        "body": [
+            "var gpa = std.heap.GeneralPurposeAllocartor(.{}){};",
+            "defer _ = gpa.deinit();",
+            "const allocator = gpa.allocator();"
+        ],
+        "description": "GeneralPurposeAllocartor declaration"
+    },
+    "Generic Function": {
+        "prefix": "fn_T",
+        "body": [
+            "pub fn ${1:name}(comptime T: type) ${2:return type} {",
+            "    ",
+            "}"
+        ],
+        "description": "Generic Function"
+    },
+    "Generic Struct": {
+        "prefix": "gen_struct",
+        "body": [
+            "pub fn ${1:name}(comptime T: type) type {",
+            "    return struct{};",
+            "}"
+        ],
+        "description": "Generic Struct"
+    }
+}

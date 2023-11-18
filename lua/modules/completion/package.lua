@@ -3,9 +3,6 @@ local conf = require('modules.completion.config')
 
 package({
   'neovim/nvim-lspconfig',
-  -- used filetype to lazyload lsp
-  -- config your language filetype in here
-  ft = { 'lua', 'rust', 'c', 'cpp' },
   config = conf.nvim_lsp,
 })
 
@@ -25,7 +22,13 @@ package({
     { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
+    { 'rafamadriz/friendly-snippets' },
+    { 'onsails/lspkind.nvim' },
   },
 })
 
-package({ 'L3MON4D3/LuaSnip', event = 'InsertCharPre', config = conf.lua_snip })
+package({
+  'L3MON4D3/LuaSnip',
+  event = 'InsertCharPre',
+  config = conf.lua_snip,
+})
