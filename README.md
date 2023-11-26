@@ -1,6 +1,6 @@
 <h1 align="center"> MagicNvim </h1>
-Magic nvim is my personal neovim configuration generated from [dope](htttps://github.com/nvimdev/dope).
-Which is based on [nvim](https://github.com/glepnir/nvim).
+Magic nvim is my personal neovim configuration generated from [dope](htttps://github.com/nvimdev/dope) .
+Which is based on [nvim](https://github.com/glepnir/nvim) .
 
 
 ## What is dope
