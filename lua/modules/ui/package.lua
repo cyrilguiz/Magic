@@ -3,11 +3,13 @@ local conf = require('modules.ui.config')
 
 package({ 'glepnir/dashboard-nvim', config = conf.dashboard })
 
-package({ 'Mofiqul/vscode.nvim' })
+package({
+  'glepnir/spaceline.vim',
+})
 
 package({
   'cyrilguiz/base46.nvim',
-  config = conf.theme,
+  config = conf.base46,
 })
 
 package({
@@ -39,12 +41,6 @@ package({
   config = function()
     require('autoclose').setup({})
   end,
-})
-
-package({
-  'nvim-lualine/lualine.nvim',
-  dependencies = { { 'nvim-tree/nvim-web-devicons', opt = true } },
-  config = conf.lualine,
 })
 
 package({

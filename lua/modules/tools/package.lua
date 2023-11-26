@@ -19,10 +19,8 @@ package({
   end,
 })
 
-package({
-  'famiu/bufdelete.nvim',
-})
+package({ 'famiu/bufdelete.nvim' })
 
-package({
-  'tpope/vim-fugitive',
-})
+package({ 'tpope/vim-fugitive' })
+
+package({ 'ziglang/zig.vim' })

@@ -54,9 +54,10 @@ function config.guard()
   local ft = require('guard.filetype')
 
   ft('lua'):fmt('stylua')
+  ft('zig'):fmt('zigfmt')
+  vim.g.zig_fmt_autosave = 0
 
   local langs = {
-    'zig',
     'json',
     'toml',
     'go',

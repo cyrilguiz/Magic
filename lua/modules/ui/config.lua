@@ -1,7 +1,11 @@
 local config = {}
 
-function config.theme()
-  vim.cmd([[colorscheme nightowl]])
+function config.base46()
+  require('base46').load_theme({
+    base = 'base46',
+    theme = 'nightowl',
+    transparency = false,
+  })
 end
 
 function config.dashboard()
@@ -63,28 +67,22 @@ function config.neotree()
         modified = '',
       },
     },
-    file_size = {
-      enabled = true,
-      required_width = 25,
-    },
     commands = {},
     window = {
       position = 'right',
       width = 35,
     },
-  })
-end
-
-function config.lualine()
-  local fn = vim.fn
-  local cwd = function()
-    local dir_name = '%#St_cwd# 󰉖 ' .. fn.fnamemodify(fn.getcwd(), ':t') .. ' '
-    return (vim.o.columns > 85 and dir_name) or ''
-  end
-
-  require('lualine').setup({
-    sections = {
-      lualine_y = { cwd() },
+    filesystem = {
+      filtered_items = {
+        hide_gitignore = false,
+        hide_dotfiles = false,
+        hide_by_name = {
+          '.git',
+        },
+        always_show = {
+          '.gitignored',
+        },
+      },
     },
   })
 end
@@ -93,9 +91,40 @@ function config.noice()
   vim.opt.termguicolors = true
   require('notify').setup({
     top_down = false,
-    stages = 'fade',
     render = 'compact',
   })
-  require('noice').setup()
+  require('noice').setup({
+    views = {
+      cmdline_popup = {
+        position = {
+          row = 1,
+          col = 75,
+        },
+        size = {
+          width = 40,
+          height = 1,
+        },
+      },
+      popupmenu = {
+        relative = 'editor',
+        position = {
+          row = 4,
+          col = 75,
+        },
+        size = {
+          width = 37,
+          height = 10,
+        },
+        border = {
+          style = 'rounded',
+          padding = { 0, 1 },
+        },
+        win_options = {
+          winhighlight = { Normal = 'Normal', FloatBorder = 'DiagnosticInfo' },
+        },
+      },
+    },
+  })
 end
+
 return config

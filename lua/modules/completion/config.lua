@@ -3,62 +3,43 @@ local config = {}
 -- config server in this function
 function config.nvim_lsp()
   local lspconfig = require('lspconfig')
-
-  -- import cmp-nvim-lsp plugin
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
-
   local keymap = vim.keymap -- for conciseness
-
   local opts = { noremap = true, silent = true }
-  local on_attach = function(client, bufnr)
+  local on_attach = function(_, bufnr)
     opts.buffer = bufnr
-
-    -- set keybinds
     opts.desc = 'Show LSP references'
-    keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts) -- show definition, references
-
+    keymap.set('n', 'gR', '<Cmd>Telescope lsp_references<Cr>', opts)
     opts.desc = 'Go to declaration'
-    keymap.set('n', 'gD', vim.lsp.buf.declaration, opts) -- go to declaration
-
+    keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     opts.desc = 'Show LSP definitions'
-    keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts) -- show lsp definitions
-
+    keymap.set('n', 'gd', '<Cmd>Lspsaga peek_definition<Cr>', opts)
     opts.desc = 'Show LSP implementations'
-    keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts) -- show lsp implementations
-
+    keymap.set('n', 'gi', '<Cmd>Telescope lsp_implementations<Cr>', opts)
     opts.desc = 'Show LSP type definitions'
-    keymap.set('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', opts) -- show lsp type definitions
-
+    keymap.set('n', 'gt', '<Cmd>Lspsaga peek_type_definiton<Cr>', opts)
     opts.desc = 'See available code actions'
-    keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
+    keymap.set({ 'n', 'v' }, '<Leader>ca', '<Cmd>Lspsaga code_action<Cr>', opts)
     opts.desc = 'Smart rename'
-    keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts) -- smart rename
-
+    keymap.set('n', '<Leader>rn', '<Cmd>Lspsaga rename<Cr>', opts)
     opts.desc = 'Show buffer diagnostics'
-    keymap.set('n', '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', opts) -- show  diagnostics for file
-
+    keymap.set('n', '<Leader>D', '<Cmd>Lspsaga show_buf_diagnostics<Cr>', opts)
     opts.desc = 'Show line diagnostics'
-    keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts) -- show diagnostics for line
-
+    keymap.set('n', '<Leader>d', '<Cmd>Lspsaga show_line_diagnostics<Cr>', opts)
     opts.desc = 'Go to previous diagnostic'
-    keymap.set('n', '[d', vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
+    keymap.set('n', '[d', '<Cmd>Lspsaga diagnostic_jump_prev<Cr> ', opts)
     opts.desc = 'Go to next diagnostic'
-    keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
+    keymap.set('n', ']d', '<Cmd>Lspsaga diagnostic_jump_next<Cr>', opts)
     opts.desc = 'Show documentation for what is under cursor'
-    keymap.set('n', 'K', vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
+    keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<Cr>', opts)
+    opts.dec = 'LSP outline'
+    keymap.set('n', '<Leader>l', '<Cmd>Lspsaga outline<Cr>', opts)
     opts.desc = 'Restart LSP'
-    keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+    keymap.set('n', '<Leader>rs', ':LspRestart<CR>', opts)
   end
 
-  -- used to enable autocompletion (assign to every lsp server config)
   local capabilities = cmp_nvim_lsp.default_capabilities()
 
-  -- Change the Diagnostic symbols in the sign column (gutter)
-  -- (not in youtube nvim video)
   local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
   for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
@@ -128,8 +109,8 @@ function config.nvim_cmp()
       ['<C-Space>'] = cmp.mapping.complete(), -- show completion suggestions
       ['<C-e>'] = cmp.mapping.abort(), -- close completion window
       ['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ['<Up>'] = cmp.mapping(function() end, { 'i', 's' }),
-      ['<Down>'] = cmp.mapping(function() end, { 'i', 's' }),
+      ['<Up>'] = cmp.mapping.abort(),
+      ['<Down>'] = cmp.mapping.abort(),
     }),
     -- sources for autocompletion
     sources = cmp.config.sources({

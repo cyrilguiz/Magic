@@ -2,28 +2,193 @@
     "GeneralPurposeAllocartor": {
         "prefix": "gpa",
         "body": [
-            "var gpa = std.heap.GeneralPurposeAllocartor(.{}){};",
+            "var gpa: std.heap.GeneralPurposeAllocator(.{}) = std.heap.GeneralPurposeAllocator(.{}){};",
             "defer _ = gpa.deinit();",
-            "const allocator = gpa.allocator();"
+            "const allocator: std.mem.Allocator = gpa.allocator();"
         ],
-        "description": "GeneralPurposeAllocartor declaration"
+        "description": "GeneralPurposeAllocator declaration"
     },
     "Generic Function": {
-        "prefix": "fn_T",
+        "prefix": "gen fn",
         "body": [
-            "pub fn ${1:name}(comptime T: type) ${2:return type} {",
-            "    ",
+            "pub fn ${1:name}(comptime T: type) ${2:!void} {",
+            "    $0",
             "}"
         ],
         "description": "Generic Function"
     },
     "Generic Struct": {
-        "prefix": "gen_struct",
+        "prefix": "gen struct",
         "body": [
             "pub fn ${1:name}(comptime T: type) type {",
             "    return struct{};",
             "}"
         ],
         "description": "Generic Struct"
+    },
+    "@import": {
+        "prefix": "import",
+        "body": [
+            "const ${1:module}: type = @import(\"${1:module}\");"
+        ],
+        "description": "Import function"
+    },
+    "Inline for loop": {
+        "prefix": "inline for",
+        "body": [
+            "inline for (${1:items}) |${2:item}| {",
+            "    $0",
+            "}"
+        ],
+        "description": "Inline for loop declaration"
+    },
+    "Inline while iterator loop": {
+        "prefix": "inline while",
+        "body": [
+            "inline while(${1:iterator}) |${2:value}| {",
+            "    $0",
+            "}"
+        ],
+        "description": "Inline while iterator loop"
+    },
+    "BufferedWriter": {
+        "prefix": "bw",
+        "body": [
+            "var bw = std.io.bufferedWriter(std.io.getStdOut().writer());",
+            "defer be.flush() catch {};",
+            "const stdout = bw.writer();"
+        ],
+        "description": "BufferedWriter declaration"
+    },
+    "BufferedReader": {
+        "prefix": "br",
+        "body": [
+            "var br = std.io.bufferedReadre(std.io.getStdIn().reader());",
+            "const stdin = bw.reader();"
+        ],
+        "description": "BufferedWriter declaration"
+    },
+    "Open a directory": {
+        "prefix": "dir",
+        "body": [
+            "var dir: std.fs.Dir = try std.fs.cwd().openDir(${1:path}, .{});"
+        ]
+    },
+    "AddModule": {
+        "prefix": "add module",
+        "body": [
+            "const ${1:module}: *std.Build.Module = b.dependency(${2:dependency}, .{}).module(${3:name});",
+            "exe.addModule(\"${1:module}\", ${1:module});"
+        ],
+        "description": "Adds a module for the Zig program."
+    },
+    "const": {
+        "prefix": "const",
+        "body": [
+            "const ${1:name}: ${2:type} = ${3:value};"
+        ],
+        "description": "Constant declaration"
+    },
+    "var": {
+        "prefix": "var",
+        "body": [
+            "var ${1:name}: ${2:type} = ${3:value};"
+        ],
+        "description": "Variable declaration"
+    },
+    "main": {
+        "prefix": "main",
+        "body": [
+            "pub fn main() !void {",
+            "   $0",
+            "}"
+        ],
+        "description": "Main function"
+    },
+    "std": {
+        "prefix": "std",
+        "body": [
+            "const std: type = @import(\"std\");"
+        ],
+        "description": "Standard library"
+    },
+    "catch switch": {
+        "prefix": "catch switch",
+        "body": [
+            "catch |err| switch (err) {",
+            "    $0",
+            "};"
+        ],
+        "description": "Catch switch statement"
+    },
+    "tagged union": {
+        "prefix": "tag_union",
+        "body": [
+            "const ${1:name}: type = union(enum) {",
+            "    $0",
+            "};"
+        ],
+        "description": "Union Tagged declaration"
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": [
+            "const ${1:name}: type = struct {",
+            "    $0",
+            "};"
+        ],
+        "description": "Struct declaration"
+    },
+    "error": {
+        "prefix": "error",
+        "body": [
+            "const ${1:name}: type = errror {",
+            "    $0",
+            "};"
+        ],
+        "description": "Error declaration"
+    },
+    "enum": {
+        "prefix": "enum",
+        "body": [
+            "const ${1:name}: type = enum {",
+            "    $0",
+            "}"
+        ],
+        "description": "Enum declaration"
+    },
+    "pub fn": {
+        "prefix": "pub fn",
+        "body": [
+            "pub fn ${1:name}() ${2:!void} {",
+            "    $0",
+            "}"
+        ]
+    },
+    "ArrayList": {
+        "prefix": "arr list",
+        "body": [
+            "var list: std.ArrayList(${1:type}) = std.ArrayList(${1:type}).init(allocator);"
+        ]
+    },
+    "HashMap": {
+        "prefix": "hash map",
+        "body": [
+            "var map: std.AutoHashMap(${1:key}, ${2:value}) = std.AutoHashMap(${1:key}, ${2:value}).init(allocator);"
+        ]
+    },
+    "ArenaAllocator": {
+        "prefix": "arena alloc",
+        "body": [
+            "var arena: std.heap.ArenaAllocator = std.heap.ArenaAllocator.init(${1:alloc});",
+            "defer arena.deinit();",
+            "const allocator: std.mem.Allocator = arena.allocator();"
+        ]
+    },
+    "Allocator": {
+        "prefix": "Allocator",
+        "body": [
+            "std.mem.Allocator"
+        ]
     }
 }
